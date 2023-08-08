@@ -14,8 +14,9 @@ services:
   backend:
     build: ./backend/
     env_file: .env
+#    command: python manage.py collectstatic && cp -r /app/collected_static/. /backend_static/
     volumes:
-      - static:/static/
+      - static:/backend_static/
       - media:/app/media/
     depends_on:
       - db
