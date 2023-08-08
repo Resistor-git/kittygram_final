@@ -28,5 +28,5 @@ COPY . .
 # ???? вроде т.к. контейнеры независимы, команда одинаковая для всех ???
 # ???? или kittygram_backend.wsgi ???? другой порт?
 # CMD ["gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi"]
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "kittygram_backend.wsgi"]
+CMD ["gunicorn", "--bind", "0.0.0.0:9000", "kittygram_backend.wsgi"]
 #CMD ["python", "manage.py", "runserver", "0:8000"]
