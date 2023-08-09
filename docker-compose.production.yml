@@ -1,0 +1,37 @@
+version: '3'
+
+volumes:
+  pg_data:
+  static:
+  media:
+
+services:
+  db:
+    image: postgres:13
+    env_file: .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  backend:
+    image: resistordocker/kittygram_backend
+    env_file: .env
+#    command: python manage.py collectstatic && cp -r /app/collected_static/. /backend_static/
+    volumes:
+      - static:/backend_static/
+#      - static:/static/
+      - media:/app/media/
+    depends_on:
+      - db
+  frontend:
+    image: resistordocker/kittygram_frontend
+    env_file: .env
+    command: cp -r /app/build/. /static/
+    volumes:
+      - static:/static
+  gateway:
+    image: resistordocker/kittygram_gateway
+    env_file: .env
+    ports:
+      - "9000:80"
+    volumes:
+      - static:/static
+      - media:/app/media
