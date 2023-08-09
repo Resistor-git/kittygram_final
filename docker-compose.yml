@@ -17,6 +17,7 @@ services:
 #    command: python manage.py collectstatic && cp -r /app/collected_static/. /backend_static/
     volumes:
       - static:/backend_static/
+#      - static:/static/
       - media:/app/media/
     depends_on:
       - db
@@ -32,5 +33,5 @@ services:
     ports:
       - "9000:80"
     volumes:
-      - static:/static/
-      - media:/app/media/
+      - static:/static
+      - media:/app/media
